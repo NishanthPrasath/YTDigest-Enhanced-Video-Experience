@@ -2,18 +2,15 @@
 
 
 ## YT Topic Generator
----
 YT Topic Generator is a chrome extension that fetches the YT URL and generates what are all the main topics in the video along with the corresponding timestamps using ChatGPT and whisper API.
 
 
 ## Resources
----
-Application Link
+Application Link <br>
 Codelab Link
 
 
 ## What is YT Topic Generator?
-
 We developed an AI powered tool which leverages combination of OPENAI Whisper and ChatGPT API to process Youtube videos and simultaneously generate what are all the main topics discussed in the video along with their respective timestamps. By using our application the user need not spend time searching for the particular contents searching through the entire video or looking into the comment section for the timestamps.
 
 The features of YT Topic Generator include:
