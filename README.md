@@ -28,12 +28,11 @@ Here is a sample output of YT Topic Generator:
 Video Title: How to Make a Paper Airplane
 
 Main Topics:
+- How to fold a paper airplane
+- Different types of paper airplanes
+- How to fly a paper airplane
 
-How to fold a paper airplane
-Different types of paper airplanes
-How to fly a paper airplane
 Timestamps:
-
-How to fold a paper airplane: 0:00-1:00
-Different types of paper airplanes: 1:00-2:00
-How to fly a paper airplane: 2:00-3:00
+- How to fold a paper airplane: 0:00-1:00
+- Different types of paper airplanes: 1:00-2:00
+- How to fly a paper airplane: 2:00-3:00
