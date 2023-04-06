@@ -36,3 +36,19 @@ Timestamps:
 - How to fold a paper airplane: 0:00-1:00
 - Different types of paper airplanes: 1:00-2:00
 - How to fly a paper airplane: 2:00-3:00
+
+
+## Steps to reproduce
+To run it locally please follow the steps below - 
+- clone the repo 
+- create a virtual environment and install requirements.txt
+- create a .env file with following variables
+
+```
+OPENAI_API_KEY=
+```
+
+- run streamlit frontend using the following command 
+```
+streamlit run <filename.py>
+```
