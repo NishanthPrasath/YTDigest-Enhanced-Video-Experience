@@ -2,7 +2,7 @@
 
 
 ## YT Topic Generator
-YT Topic Generator is a chrome extension that fetches the YT URL and generates what are all the main topics in the video along with the corresponding timestamps using ChatGPT and whisper API.
+YT Topic Generator is a chrome extension that fetches the YT URL and generates what are all the main topics in the video along with the corresponding timestamps using ChatGPT API and whisper API.
 
 
 ## Resources
