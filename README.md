@@ -20,7 +20,7 @@ In present day, Topic-wise chapter timestamps are manually provided by the user 
 
 ## Tech Deliverables
 
-- The overall architecture involves storing data into AWS S3 buckets
+- The overall architechture uses FastAPI to create RestAPI endpoints & data storage in AWS S3 buckets
 - Using Whisper API to transcribe/translate audio based on Language
 - Topic-wise chapter timestamp generation using GPT3.5-turbo and GPT-davinci Models
 - Comment sentiment analysis using YouTube and GPT3.5-turbo API
