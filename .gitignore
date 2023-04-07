@@ -2,3 +2,7 @@ venv_a5
 test.py
 audio.mp3
 lex_ai_sam_altman_5min.mp3
+.env
+.vscode
+test
+
