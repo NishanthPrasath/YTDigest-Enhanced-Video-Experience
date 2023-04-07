@@ -38,7 +38,7 @@ class ask_GPT(BaseModel):
     filename: str
 
 class videoUrl(BaseModel):
-   url: str
+   link: str
 
 load_dotenv()
 
@@ -53,9 +53,6 @@ def transcribe_audio(audio, lang='English'):
   language = lang
   options = dict(language=language, beam_size=5, best_of=5)
   translate_options = dict(task="translate", **options)
-  print("11111111")
-  print(audio)
-  print("11111111")
   translation_segments = model.transcribe(audio, **translate_options)["segments"]
   transcript_seg=[]
   for i in range(len(translation_segments)):
@@ -109,7 +106,7 @@ def count_tokens(text):
 
 
 def break_up_file_to_chunks(text, chunk_size=2000, overlap=100):
-
+    encoding = tiktoken.get_encoding("gpt2")
     tokens = encoding.encode(text)
     num_tokens = len(tokens)
     
@@ -193,7 +190,7 @@ def convert_text(text):
 def ask_GPT(ask_gpt:ask_GPT):
     s3 = boto3.client('s3', aws_access_key_id=aws_access_key_id, aws_secret_access_key=aws_secret_access_key)
     bucket_name = 'damg7245-assignment-1'
-    file_name = ask_gpt.filename + 'txt'
+    file_name = ask_gpt.filename + '.txt'
     file_key = 'Processed_file/' + file_name
 
     # Use the client object to get the contents of the file
@@ -204,12 +201,16 @@ def ask_GPT(ask_gpt:ask_GPT):
 
     num_tokens = count_tokens(transcript_seg)
     if num_tokens > 2000:
-        reply = split_tokens_chat(transcript_seg, 'summarize')
+        reply = split_tokens_chat(transcript_seg, ask_gpt.question)
 
     else:
         message_history = []
         # reply = chat(transcript_seg, "What are all the main topics and their corresponding start and end time stamps in the text?",message_history )
         reply = chat(transcript_seg, ask_gpt.question ,message_history)
+    
+    data = {'data':reply, 'message': 'Question answered successfully', 'status_code': '200'}
+
+    return data
 
 @app.post('/transcribeAndStore')
 async def transcribeAndStore(transcribe_model:transcribe):
@@ -219,23 +220,24 @@ async def transcribeAndStore(transcribe_model:transcribe):
     s3 = boto3.client('s3', aws_access_key_id=aws_access_key_id, aws_secret_access_key=aws_secret_access_key)
     bucket_name = 'damg7245-assignment-1'
 
-    # yt = YouTube(transcribe_model.link)
+    yt = YouTube(transcribe_model.link)
 
-    # audio = yt.streams.filter(only_audio=True).first()
+    audio = yt.streams.filter(only_audio=True).first()
 
-    # audio_file = audio.download(filename_prefix="audio_")
+    audio_file = audio.download(filename_prefix="audio_")
 
-    # mp3_file = os.path.join(os.getcwd(), "audio.mp3")
-    # AudioFileClip(audio_file).write_audiofile(mp3_file)
+    mp3_file = os.path.join(os.getcwd(), "audio.mp3")
+    AudioFileClip(audio_file).write_audiofile(mp3_file)
+    os.remove(audio_file)
     print("Audio file downloaded successfully")
 
-    # current_dir = os.getcwd()
-    # print(current_dir)
 
-    # current_dir = current_dir.replace("\\","/")
-    transcription = transcribe_audio("audio.mp3",transcribe_model.language)
+    input_data = open("audio.mp3",'rb')
 
-    #os.remove(audio_file)
+    if transcribe_model.language=="English" or transcribe_model.language=="english":
+        transcription = openai.Audio.transcribe(model="whisper-1", file=input_data, response_format='text')
+    else:
+        transcription = openai.Audio.translate(model="whisper-1", file=input_data, response_format='text')
 
     print("Transcription completed successfully")
     outputFile = 'audio.txt'
@@ -253,7 +255,7 @@ async def transcribeAndStore(transcribe_model:transcribe):
 
 @app.post('/sentimentAnalysis')
 def sentiment_analysis(url:videoUrl):
-    video_url = url.url
+    video_url = url.link
     YOUTUBE_API_SERVICE_NAME = "youtube"
     YOUTUBE_API_VERSION = "v3"
     youtube = googleapiclient.discovery.build(
@@ -282,5 +284,6 @@ def sentiment_analysis(url:videoUrl):
 
     # Append the generated response to the message history
     message_history.append({"role": "assistant", "content": f"{reply_content}"})
+    data = {'data':message_history[1]['content'].strip(), 'message': 'Sentiment analysis done successfully', 'status_code': '200'}
 
-    return message_history[1]['content'].strip()
+    return data
