@@ -1,42 +1,30 @@
-# Assignment_05
+# YouTubeDigest - Enhancing user's watching experience
 
-
-## YT Topic Generator
-YT Topic Generator is a chrome extension that fetches the YT URL and generates what are all the main topics in the video along with the corresponding timestamps using ChatGPT API and whisper API.
-
+YouTubeDigest is an AI application created to enhance user's video watching experience with features of audio translation, topic wise chapter maker, comments sentiment analysis, and overall context summarization. 
 
 ## Resources
-Application Link <br>
-Codelab Link
 
+- [Application link](http://34.148.127.152:8502/) <br>
+- [Codelab Documentation](https://codelabs-preview.appspot.com/?file_id=1xg3GM0WPZ6wiiJ1tQuYKwh3pL3GA_JjXaTEAWP4Pf4k#0)
 
-## What is YT Topic Generator?
-We developed an AI powered tool which leverages combination of OPENAI Whisper and ChatGPT API to process Youtube videos and simultaneously generate what are all the main topics discussed in the video along with their respective timestamps. By using our application the user need not spend time searching for the particular contents searching through the entire video or looking into the comment section for the timestamps.
+## What is YouTubeDigest?
 
-The features of YT Topic Generator include:
+In present day, Topic-wise chapter making is done manually by the user which makes its availability totally uncertain. Additionally, YouTube recently has discontinued the 'dislike' count on videos which makes it to judge a video's content before watching it. To majorly solve both these problems we developed an AI powered tool which leverages combination of OPENAI Whisper, GPT API and Google Youtube, TTS(Text-to-speech) API to process youtube videos. This tool streamlines the process of translating different language audio to English, generating topic-vise chapters, comment sentimental analysis and summaries for long videos. YouTubeDigest is able to process long transcripts (tested upto 57 mins| ~8000 tokens) by uniquely processing text into smaller chunks for GPT api to be able to process 
 
-- It can be used to extract the main topics of any YouTube video.
-- It can generate a list of the main topics along with the corresponding timestamps.
-- It can be used to find the main topics of a video quickly and easily.
-- It is free to use.
+## Features
+- Youtube videos transcribed to text (English and other languages) 
+- Translation of audio to English
+- Topic-wise Chapter Timestamp generation
+- Comment sentiment analysis
+- Video script summarization 
 
+## Tech Deliverables
 
-YT Topic Generator is a great tool for anyone who wants to find the main topics of a YouTube video quickly and easily. It is also a great tool for students who are looking for information for a research paper or project.
-
-Here is a sample output of YT Topic Generator:
-
-Video Title: How to Make a Paper Airplane
-
-Main Topics:
-- How to fold a paper airplane
-- Different types of paper airplanes
-- How to fly a paper airplane
-
-Timestamps:
-- How to fold a paper airplane: 0:00-1:00
-- Different types of paper airplanes: 1:00-2:00
-- How to fly a paper airplane: 2:00-3:00
-
+- The overall architecture involves storing data into AWS S3 buckets
+- Using Whisper API to transcribe/translate audio based on Language
+- Topic-wise chapter timestamp generation using GPT3.5-turbo and GPT-davinci Models
+- Comment sentiment analysis using YouTube and GPT3.5-turbo API
+- Translating and converting it to speech using Google TTS API
 
 ## Steps to reproduce
 To run it locally please follow the steps below - 
@@ -45,10 +33,13 @@ To run it locally please follow the steps below -
 - create a .env file with following variables
 
 ```
-OPENAI_API_KEY=
+OPEN_AI_API_KEY=
+DEVELOPER_KEY= <Google API KEY>
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
 ```
 
 - run streamlit frontend using the following command 
 ```
-streamlit run <filename.py>
+streamlit run App.py
 ```
