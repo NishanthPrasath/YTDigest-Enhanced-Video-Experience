@@ -174,7 +174,7 @@ if num_tokens > 2000:
 
 else:
   message_history = []
-  reply = chat(transcript_seg, "What are all the main topics and their corresponding start and end time stamps in the text? \
+  reply = chat(transcript_seg, "What are all the main topic and their corresponding start and end time stamps in the text? \
    follow this format: Main topic name followed by a comma then start time followed by a comma  not hyphen then end time followed by ; not new line dont use any other characters",message_history )
 
 reply = reply.replace('\n', "")
