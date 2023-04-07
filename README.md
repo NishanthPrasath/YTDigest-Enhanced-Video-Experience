@@ -11,6 +11,9 @@ YouTubeDigest is an AI application created to enhance user's video watching expe
 
 In present day, Topic-wise chapter timestamps are manually provided by the user which make its availability totally uncertain. Additionally, YouTube recently discontinued the 'dislike' count on videos which makes it hard to judge the content before watching it. To solve for these shortcomings we developed an AI powered tool which leverages combination of OPENAI Whisper, GPT API, Google Youtube and TTS(Text-to-speech) API to process Youtube videos. This tool streamlines the process of translating different language audio to English, generating topic-vise chapter timestamps, comment sentimental analysis and summaries for long videos. YouTubeDigest is able to process long transcripts (tested upto 57 mins| ~8000 tokens) by uniquely processing text into smaller chunks for GPT api to be able to process 
 
+## Architecture Diagram
+<img src="Assignment 5 Arch Diagram.png" alt="Architecture Diagram">
+
 ## Features
 - Youtube videos transcribed to text (English and other languages) 
 - Translation of audio to English
