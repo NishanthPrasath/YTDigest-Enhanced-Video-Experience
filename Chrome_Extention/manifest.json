@@ -1,0 +1,11 @@
+{
+    "name": "VidLingo",
+    "version": "1.0.0",
+    "description": "This is an extention to summerize the youtube video",
+    "manifest_version": 3,
+    "author": "Subhash Chandran",
+    "action": {
+        "default_popup": "index.html",
+        "default_title": "VidLingo"
+    }
+}
